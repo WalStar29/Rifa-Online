@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mega Rifa</title>
+    <style>
+    /* 🎯 Reset básico */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #ffffff;
+        color: #212121;
+        line-height: 1.6;
+    }
+
+    /* 🧢 Header */
+    header {
+        background: #ffffff;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        border-bottom: #000000 solid 2px;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo img {
+        height: 60px;
+        border-radius: 10px;
+    }
+
+    .info-text h4 {
+        font-size: 1.8em;
+        color: #000000;
+        margin-bottom: 5px;
+    }
+
+    .info-text p {
+        font-size: 1em;
+        color: #000000;
+    }
+
+    .header-content2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        min-width: 200px;
+        text-align: right;
+    }
+
+    .timer {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #000000;
+        margin-bottom: 5px;
+    }
+
+    .header-content2 p {
+        font-size: 1em;
+        color: #000000;
+    }
+
+    /* 🧱 Contenedor principal */
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    /* 📢 Mensaje central */
+    .mensaje-central {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .mensaje-central h2 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #000000;
+    }
+
+    .mensaje-central p {
+        font-size: 1.05em;
+        margin: 6px 0;
+        color: #000000;
+    }
+
+    .resaltado {
+        color: #000000;
+        font-weight: bold;
+    }
+
+    /* 🧩 Columnas */
+    .contenido-izquierdo,
+    .contenido-derecho {
+        flex: 1;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        border: #000000 solid 2px;
+    }
+
+    .contenido-izquierdo {
+        max-width: 350px;
+        margin-right: 20px;
+    }
+
+    .contenido-derecho {
+        max-width: 1000px;
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    /* 🖼️ Imagen del premio */
+    .premio img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* 📄 Descripción y métodos de pago */
+    .descripcion,
+    .metodopago {
+        margin-bottom: 20px;
+    }
+
+    .descripcion h4,
+    .metodopago h4 {
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        color: #000000;
+    }
+
+    .descripcion p,
+    .metodopago p {
+        color: #000000;
+    }
+
+    /* 🔢 Selector de números */
+    .selector-numeros h3 {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        color: #212121;
+    }
+
+    .numeros-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 6px;
+        max-height: 400px;
+        overflow-y: auto;
+        background: #ffffff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    /* 🔘 Números */
+    .numero {
+        background: #00e1ff;
+        border-radius: 5px;
+        text-align: center;
+        padding: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .numero:hover {
+        background: #ffffff;
+        transform: scale(1.05);
+    }
+
+    .numero.seleccionado {
+        background: #00ff59;
+        color: #000000;
+    }
+
+    .numero.vendido {
+        background: #ff0000;
+        color: #fff;
+        cursor: not-allowed;
+    }
+
+    /* 🛒 Carrito */
+    .carrito-compra {
+        background: #ffffff;
+        border: 2px solid #ff4081;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: none;
+        margin-top: 20px;
+    }
+
+    .carrito-compra.mostrar {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .total {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #ff1744;
+        margin-top: 10px;
+    }
+
+    /* 🟠 Botón */
+    .boton-comprar {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #00c853;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .boton-comprar:hover {
+        background: #009e3c;
+    }
+
+    /* 🪟 Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-contenido {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        animation: aparecer 0.4s ease;
+        position: relative;
+    }
+
+    @keyframes aparecer {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .cerrar-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #888;
+    }
+
+    /* 📱 Estilo responsivo */
+    @media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .contenido-izquierdo,
+    .contenido-derecho {
+        max-width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .numeros-grid {
+        grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+        max-height: 300px;
+    }
+
+    .boton-comprar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .carrito-compra {
+        padding: 10px;
+    }
+
+    .modal-contenido {
+        width: 95%;
+        padding: 20px;
+    }
+    }
+
+    @media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .header-content2 {
+        align-items: center;
+        text-align: center;
+    }
+
+    .mensaje-central h2 {
+        font-size: 1.5em;
+    }
+
+    .mensaje-central p {
+        font-size: 1em;
+    }
+
+    .info-text h4 {
+        font-size: 1.4em;
+    }
+
+    .info-text p,
+    .header-content2 p,
+    .descripcion p,
+    .metodopago p {
+        font-size: 0.95em;
+    }
+
+    .selector-numeros h3 {
+        font-size: 1em;
+    }
+
+    .numero {
+        padding: 6px;
+        font-size: 0.9em;
+    }
+
+    .total {
+        font-size: 1em;
+    }
+
+    .boton-comprar {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+        <div class="logo">
+            <img src="logo.jpg" alt="Logo Mega Rifa" />
+        </div>
+        <div class="info-text">
+            <h4>MEGA RIFA</h4>
+            <p>¡Compra con Pago Móvil, Zelle o Tarjeta!</p>
+        </div>
+        </div>
+        <div class="header-content2">
+        <p class="timer" id="countdown">Cargando tiempo...</p>
+        <p>Premio: iPhone 15 Pro Max 256GB</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="mensaje-central">
+            <h2>¡Bienvenido a la Mega Rifa!</h2>
+            <p>Participa y gana un increíble <strong>iPhone 15 Pro Max 256GB</strong>.</p>
+            <p>Compra tu boleto ahora y no te pierdas la oportunidad de ganar.</p>
+            <p><span class="resaltado">El sorteo se realizará en 40 minutos.</span></p>
+        </div>
+
+        <div class="contenido-izquierdo">
+            <div class="premio">
+                <img src="logo.jpg" alt="Imagen del premio" />
+                <div class="descripcion">
+                    <h4>Descripción del Premio</h4>
+                    <p>iPhone 15 Pro Max 256GB</p>
+                    <p>¡Un dispositivo de última generación con tecnología avanzada!</p><br>
+                    <h4>Valor</h4>
+                    <p>0.50$ por número</p>
+                </div>
+                <div class="metodopago">
+                    <h4>Métodos de Pago</h4>
+                    <p>Pago Móvil</p>
+                    <p>Banco de Venezuela</p>
+                    <p>Teléfono: 0414-7996937</p>
+                    <p>Cédula: V-29582989</p>
+                </div>
+                <div id="carrito" class="carrito-compra">
+                    <h4>🛒 Números seleccionados</h4>
+                    <p id="lista-seleccionados">Ninguno</p>
+                    <p id="total-compra" class="total">$0.00</p>
+                    <button id="btn-whatsapp" class="boton-comprar">Quiero comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="contenido-derecho">
+            <div class="selector-numeros">
+                <h3>Selecciona tus números de la suerte (1–1000)</h3>
+                <div class="numeros-grid" id="numeros-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="modal-compra" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar-modal">&times;</span>
+        <h3>Confirmación de compra</h3>
+        <p id="modal-numeros">Números seleccionados: </p>
+        <p id="modal-total">Total a pagar: </p>
+        <p>¿Deseas continuar con el pago vía WhatsApp?</p>
+        <button id="confirmar-whatsapp" class="boton-comprar">Sí, continuar</button>
+        </div>
+    </div>
+
+    <script>
+        // ⏱ Temporizador
+        const countdownElement = document.getElementById("countdown");
+        const targetTime = new Date().getTime() + 40 * 60 * 1000;
+
+        function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetTime - now;
+
+        if (distance < 0) {
+            countdownElement.textContent = "¡Sorteo en curso!";
+            return;
+        }
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownElement.textContent = `Tiempo restante: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 🔢 Selector de números
+        const grid = document.getElementById("numeros-grid");
+        const carrito = document.getElementById("carrito");
+        const listaSeleccionados = document.getElementById("lista-seleccionados");
+        const totalCompra = document.getElementById("total-compra");
+
+        function actualizarCarrito() {
+        const seleccionados = document.querySelectorAll(".numero.seleccionado");
+
+        if (seleccionados.length > 0) {
+            carrito.classList.remove("oculto");
+            carrito.classList.add("mostrar");
+
+            const numeros = Array.from(seleccionados).map(n => n.textContent);
+            listaSeleccionados.textContent = numeros.join(", ");
+
+            const total = numeros.length * 0.50;
+            totalCompra.textContent = `$${total.toFixed(2)}`;
+        } else {
+            carrito.classList.remove("mostrar");
+            carrito.classList.add("oculto");
+
+            listaSeleccionados.textContent = "Ninguno";
+            totalCompra.textContent = "$0.00";
+        }
+        }
+
+        for (let i = 1; i <= 1000; i++) {
+        const num = document.createElement("div");
+        num.className = "numero";
+        num.textContent = i;
+        num.addEventListener("click", () => {
+            if (!num.classList.contains("vendido")) {
+            num.classList.toggle("seleccionado");
+            actualizarCarrito();
+            }
+        });
+        grid.appendChild(num);
+        }
+
+        // 💬 Modal de confirmación
+        const modal = document.getElementById("modal-compra");
+        const cerrarModal = document.querySelector(".cerrar-modal");
+        const btnWhatsapp = document.getElementById("btn-whatsapp");
+        const confirmarWhatsapp = document.getElementById("confirmar-whatsapp");
+        const modalNumeros = document.getElementById("modal-numeros");
+        const modalTotal = document.getElementById("modal-total");
+
+        btnWhatsapp.addEventListener("click", () => {
+        const seleccionados = document.querySelectorAll(".numero.seleccionado");
+        if (seleccionados.length === 0) return;
+
+        const numeros = Array.from(seleccionados).map(n => n.textContent);
+        const total = numeros.length * 0.50;
+
+        modalNumeros.textContent = `Números seleccionados: ${numeros.join(", ")}`;
+        modalTotal.textContent = `Total a pagar: $${total.toFixed(2)}`;
+        modal.style.display = "flex";
+        });
+
+        cerrarModal.addEventListener("click", () => {
+        modal.style.display = "none";
+        });
+
+        confirmarWhatsapp.addEventListener("click", () => {
+        const seleccionados = document.querySelectorAll(".numero.seleccionado");
+        const numeros = Array.from(seleccionados).map(n => n.textContent);
+        const total = numeros.length * 0.50;
+
+        const mensaje = `¡Hola! Quiero participar en la rifa del iPhone 15 Pro Max.\n\nNúmeros seleccionados: ${numeros.join(", ")}\nTotal a pagar: $${total.toFixed(2)}\n\nMétodo de pago: Pago Móvil\nTeléfono: 0414-7996937\nCédula: V-29582989`;
+
+        const url = `https://wa.me/584147996937?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, "_blank");
+        modal.style.display = "none";
+        });
+    </script>
+</body>
+</html>
