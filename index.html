@@ -14,20 +14,21 @@
 
     body {
         font-family: 'Segoe UI', sans-serif;
-        background: #ffffff;
-        color: #212121;
+        background: rgb(238, 238, 238);
+        color: rgb(34, 40, 49);
         line-height: 1.6;
     }
 
     /* 🧢 Header */
     header {
-        background: #ffffff;
+        background: rgb(0, 173, 181);
         padding: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        border-bottom: #000000 solid 2px;
+        border-bottom: rgb(34, 40, 49) solid 3px;
+        border-radius: 0 0 10px 10px;
     }
 
     .header-content {
@@ -43,13 +44,13 @@
 
     .info-text h4 {
         font-size: 1.8em;
-        color: #000000;
+        color: rgb(34, 40, 49);
         margin-bottom: 5px;
     }
 
     .info-text p {
         font-size: 1em;
-        color: #000000;
+        color: rgb(34, 40, 49);
     }
 
     .header-content2 {
@@ -64,13 +65,13 @@
     .timer {
         font-size: 1.2em;
         font-weight: bold;
-        color: #000000;
+        color: rgb(34, 40, 49);
         margin-bottom: 5px;
     }
 
     .header-content2 p {
         font-size: 1em;
-        color: #000000;
+        color: rgb(34, 40, 49);
     }
 
     /* 🧱 Contenedor principal */
@@ -91,18 +92,23 @@
     .mensaje-central h2 {
         font-size: 2em;
         margin-bottom: 10px;
-        color: #000000;
+        color: rgb(34, 40, 49);
     }
 
     .mensaje-central p {
         font-size: 1.05em;
         margin: 6px 0;
-        color: #000000;
+        color: rgb(34, 40, 49);
     }
 
     .resaltado {
-        color: #000000;
+        color: rgb(34, 40, 49);
         font-weight: bold;
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;
     }
 
     /* 🧩 Columnas */
@@ -110,10 +116,10 @@
     .contenido-derecho {
         flex: 1;
         padding: 20px;
-        background: #ffffff;
+        background: rgb(57, 62, 70);
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
-        border: #000000 solid 2px;
+        box-shadow: 0 0 10px rgba(0,0,0);
+        border: rgb(0, 173, 181) solid 3px;
     }
 
     .contenido-izquierdo {
@@ -148,28 +154,29 @@
     .metodopago h4 {
         margin-bottom: 5px;
         font-size: 1.1em;
-        color: #000000;
+        color: rgb(0, 173, 181);
     }
 
     .descripcion p,
     .metodopago p {
-        color: #000000;
+        color: rgb(238, 238, 238);
     }
 
     /* 🔢 Selector de números */
     .selector-numeros h3 {
         margin-bottom: 10px;
         font-size: 1.2em;
-        color: #212121;
+        color: rgb(0, 173, 181);
+        text-align: center;
     }
 
     .numeros-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); /* ← Más ancho para 4 dígitos */
         gap: 6px;
         max-height: 400px;
         overflow-y: auto;
-        background: #ffffff;
+        background: rgb(238, 238, 238);
         padding: 10px;
         border-radius: 10px;
         box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
@@ -177,17 +184,21 @@
 
     /* 🔘 Números */
     .numero {
-        background: #00e1ff;
+        background: rgb(0, 173, 181);
         border-radius: 5px;
         text-align: center;
-        padding: 8px;
+        padding: 6px 4px;
         cursor: pointer;
         font-weight: bold;
+        font-size: 0.85em; /* ← Ajuste para 4 dígitos */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         transition: background 0.3s, transform 0.2s;
     }
 
     .numero:hover {
-        background: #ffffff;
+        background: rgb(238, 238, 238);
         transform: scale(1.05);
     }
 
@@ -204,11 +215,11 @@
 
     /* 🛒 Carrito */
     .carrito-compra {
-        background: #ffffff;
-        border: 2px solid #ff4081;
+        background: rgb(238, 238, 238);
+        border: 3px solid rgb(0, 173, 181);
         padding: 15px;
         border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        box-shadow: 0 0 15px rgb(34, 40, 49);
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.4s ease, transform 0.4s ease;
@@ -225,7 +236,7 @@
     .total {
         font-size: 1.2em;
         font-weight: bold;
-        color: #ff1744;
+        color: rgb(34, 40, 49);
         margin-top: 10px;
     }
 
@@ -233,8 +244,8 @@
     .boton-comprar {
         margin-top: 10px;
         padding: 10px 20px;
-        background: #00c853;
-        color: white;
+        background: rgb(0, 173, 181);
+        color: rgb(34, 40, 49);
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -288,92 +299,97 @@
 
     /* 📱 Estilo responsivo */
     @media (max-width: 800px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
+        .container {
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
-    .contenido-izquierdo,
-    .contenido-derecho {
-        max-width: 100%;
-        margin: 0 0 20px 0;
-    }
+        .contenido-izquierdo,
+        .contenido-derecho {
+            max-width: 100%;
+            margin: 0 0 20px 0;
+        }
 
-    .numeros-grid {
-        grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
-        max-height: 300px;
-    }
+        .numeros-grid {
+            grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); /* ← Aumentado de 35px a 45px */
+            max-height: 300px;
+        }
 
-    .boton-comprar {
-        width: 100%;
-        text-align: center;
-    }
+        .numero {
+            font-size: 0.9em; /* ← Ligero aumento para mejor legibilidad */
+            padding: 6px 2px; /* ← Ajuste fino para mantener proporción */
+        }
 
-    .carrito-compra {
-        padding: 10px;
-    }
+        .boton-comprar {
+            width: 100%;
+            text-align: center;
+        }
 
-    .modal-contenido {
-        width: 95%;
-        padding: 20px;
-    }
+        .carrito-compra {
+            padding: 10px;
+        }
+
+        .modal-contenido {
+            width: 95%;
+            padding: 20px;
+        }
     }
 
     @media (max-width: 600px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+        header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-    .header-content {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 15px;
-    }
+        .header-content {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-    .header-content2 {
-        align-items: center;
-        text-align: center;
-    }
+        .header-content2 {
+            align-items: center;
+            text-align: center;
+        }
 
-    .mensaje-central h2 {
-        font-size: 1.5em;
-    }
+        .mensaje-central h2 {
+            font-size: 1.5em;
+        }
 
-    .mensaje-central p {
-        font-size: 1em;
-    }
+        .mensaje-central p {
+            font-size: 1em;
+        }
 
-    .info-text h4 {
-        font-size: 1.4em;
-    }
+        .info-text h4 {
+            font-size: 1.4em;
+        }
 
-    .info-text p,
-    .header-content2 p,
-    .descripcion p,
-    .metodopago p {
-        font-size: 0.95em;
-    }
+        .info-text p,
+        .header-content2 p,
+        .descripcion p,
+        .metodopago p {
+            font-size: 0.95em;
+        }
 
-    .selector-numeros h3 {
-        font-size: 1em;
-    }
+        .selector-numeros h3 {
+            font-size: 1em;
+        }
 
-    .numero {
-        padding: 6px;
-        font-size: 0.9em;
-    }
+        .numero {
+            padding: 6px;
+            font-size: 0.9em;
+        }
 
-    .total {
-        font-size: 1em;
-    }
+        .total {
+            font-size: 1em;
+        }
 
-    .boton-comprar {
-        font-size: 1em;
-        padding: 8px 16px;
-    }
+        .boton-comprar {
+            font-size: 1em;
+            padding: 8px 16px;
+        }
     }
     </style>
 </head>
@@ -439,21 +455,21 @@
     <!-- Modal de confirmación -->
     <div id="modal-compra" class="modal">
         <div class="modal-contenido">
-        <span class="cerrar-modal">&times;</span>
-        <h3>Confirmación de compra</h3>
-        <p id="modal-numeros">Números seleccionados: </p>
-        <p id="modal-total">Total a pagar: </p>
-        <p>¿Deseas continuar con el pago vía WhatsApp?</p>
-        <button id="confirmar-whatsapp" class="boton-comprar">Sí, continuar</button>
+            <span class="cerrar-modal">&times;</span>
+            <h3>Confirmación de compra</h3>
+            <p id="modal-numeros">Números seleccionados: </p>
+            <p id="modal-total">Total a pagar: </p>
+            <p>¿Deseas continuar con el pago vía WhatsApp?</p>
+            <button id="confirmar-whatsapp" class="boton-comprar">Sí, continuar</button>
         </div>
     </div>
 
-    <script>
-        // ⏱ Temporizador
-        const countdownElement = document.getElementById("countdown");
-        const targetTime = new Date().getTime() + 40 * 60 * 1000;
+<script>
+    // ⏱ Temporizador
+    const countdownElement = document.getElementById("countdown");
+    const targetTime = new Date().getTime() + 40 * 60 * 1000;
 
-        function updateCountdown() {
+    function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetTime - now;
 
@@ -465,18 +481,18 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         countdownElement.textContent = `Tiempo restante: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
+    }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-        // 🔢 Selector de números
-        const grid = document.getElementById("numeros-grid");
-        const carrito = document.getElementById("carrito");
-        const listaSeleccionados = document.getElementById("lista-seleccionados");
-        const totalCompra = document.getElementById("total-compra");
+    // 🔢 Selector de números
+    const grid = document.getElementById("numeros-grid");
+    const carrito = document.getElementById("carrito");
+    const listaSeleccionados = document.getElementById("lista-seleccionados");
+    const totalCompra = document.getElementById("total-compra");
 
-        function actualizarCarrito() {
+    function actualizarCarrito() {
         const seleccionados = document.querySelectorAll(".numero.seleccionado");
 
         if (seleccionados.length > 0) {
@@ -495,30 +511,30 @@
             listaSeleccionados.textContent = "Ninguno";
             totalCompra.textContent = "$0.00";
         }
-        }
+    }
 
-        for (let i = 1; i <= 1000; i++) {
+    for (let i = 1; i <= 1000; i++) {
         const num = document.createElement("div");
         num.className = "numero";
-        num.textContent = i;
+        num.textContent = i.toString().padStart(4, '0'); // ← Formato 0001 a 1000
         num.addEventListener("click", () => {
             if (!num.classList.contains("vendido")) {
-            num.classList.toggle("seleccionado");
-            actualizarCarrito();
+                num.classList.toggle("seleccionado");
+                actualizarCarrito();
             }
         });
         grid.appendChild(num);
-        }
+    }
 
-        // 💬 Modal de confirmación
-        const modal = document.getElementById("modal-compra");
-        const cerrarModal = document.querySelector(".cerrar-modal");
-        const btnWhatsapp = document.getElementById("btn-whatsapp");
-        const confirmarWhatsapp = document.getElementById("confirmar-whatsapp");
-        const modalNumeros = document.getElementById("modal-numeros");
-        const modalTotal = document.getElementById("modal-total");
+    // 💬 Modal de confirmación
+    const modal = document.getElementById("modal-compra");
+    const cerrarModal = document.querySelector(".cerrar-modal");
+    const btnWhatsapp = document.getElementById("btn-whatsapp");
+    const confirmarWhatsapp = document.getElementById("confirmar-whatsapp");
+    const modalNumeros = document.getElementById("modal-numeros");
+    const modalTotal = document.getElementById("modal-total");
 
-        btnWhatsapp.addEventListener("click", () => {
+    btnWhatsapp.addEventListener("click", () => {
         const seleccionados = document.querySelectorAll(".numero.seleccionado");
         if (seleccionados.length === 0) return;
 
@@ -528,13 +544,13 @@
         modalNumeros.textContent = `Números seleccionados: ${numeros.join(", ")}`;
         modalTotal.textContent = `Total a pagar: $${total.toFixed(2)}`;
         modal.style.display = "flex";
-        });
+    });
 
-        cerrarModal.addEventListener("click", () => {
+    cerrarModal.addEventListener("click", () => {
         modal.style.display = "none";
-        });
+    });
 
-        confirmarWhatsapp.addEventListener("click", () => {
+    confirmarWhatsapp.addEventListener("click", () => {
         const seleccionados = document.querySelectorAll(".numero.seleccionado");
         const numeros = Array.from(seleccionados).map(n => n.textContent);
         const total = numeros.length * 0.50;
@@ -544,7 +560,8 @@
         const url = `https://wa.me/584147996937?text=${encodeURIComponent(mensaje)}`;
         window.open(url, "_blank");
         modal.style.display = "none";
-        });
-    </script>
+    });
+</script>
+
 </body>
 </html>
