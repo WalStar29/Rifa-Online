@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mega Rifa</title>
+<!-- 📱 Manifest y PWA -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#00adb5" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<!-- 🖼️ Íconos personalizados -->
+<link rel="icon" type="image/png" sizes="192x192" href="logo.jpg" />
+<link rel="apple-touch-icon" href="logo.jpg" />
     <style>
     /* 🎯 Reset básico */
     * {
@@ -17,6 +25,7 @@
         background: rgb(238, 238, 238);
         color: rgb(34, 40, 49);
         line-height: 1.6;
+        box-shadow: inset 0 0 60px rgba(0, 173, 181, 0.2);
     }
 
     /* 🧢 Header */
@@ -391,6 +400,74 @@
             padding: 8px 16px;
         }
     }
+
+/* 🎡 Ruleta circular mejorada */
+.ruleta-circular-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ruleta-circular {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid rgb(0, 173, 181);
+    animation: girarLento 12s linear infinite;
+    background: radial-gradient(circle, rgb(238, 238, 238) 40%, rgb(0, 173, 181) 100%);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.ruleta-item {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background: rgb(0, 173, 181);
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    transform-origin: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Posiciones circulares */
+.ruleta-item:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.ruleta-item:nth-child(2) { top: 25%; left: 100%; transform: translate(-100%, -50%); }
+.ruleta-item:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.ruleta-item:nth-child(4) { top: 75%; left: 0%; transform: translate(0%, -50%); }
+.ruleta-item:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
+
+@keyframes girarLento {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 🎲 Botón aleatorio */
+.boton-aleatorio {
+    margin: 10px auto 20px auto;
+    display: block;
+    padding: 10px 20px;
+    background: #009e3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.boton-aleatorio:hover {
+    background: #00c94d;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -420,7 +497,7 @@
 
         <div class="contenido-izquierdo">
             <div class="premio">
-                <img src="logo.jpg" alt="Imagen del premio" />
+                <img src="iphone.png" alt="Imagen del premio" />
                 <div class="descripcion">
                     <h4>Descripción del Premio</h4>
                     <p>iPhone 15 Pro Max 256GB</p>
@@ -447,7 +524,19 @@
         <div class="contenido-derecho">
             <div class="selector-numeros">
                 <h3>Selecciona tus números de la suerte (1–1000)</h3>
+                <button id="btn-aleatorio" class="boton-aleatorio">🎲 Elegir número aleatorio</button>
+
                 <div class="numeros-grid" id="numeros-grid"></div>
+            </div>
+
+            <div class="ruleta-circular-container">
+                <div class="ruleta-circular" id="ruleta-circular">
+                    <div class="ruleta-item">0001</div>
+                    <div class="ruleta-item">0250</div>
+                    <div class="ruleta-item">0500</div>
+                    <div class="ruleta-item">0750</div>
+                    <div class="ruleta-item">1000</div>
+                </div>
             </div>
         </div>
     </div>
@@ -560,6 +649,31 @@
         const url = `https://wa.me/584147996937?text=${encodeURIComponent(mensaje)}`;
         window.open(url, "_blank");
         modal.style.display = "none";
+    });
+
+    // 🎡 Ruleta circular dinámica
+    const ruletaItems = document.querySelectorAll(".ruleta-item");
+    function actualizarRuletaBonita() {
+        ruletaItems.forEach((item, i) => {
+            const numero = Math.floor(Math.random() * 1000) + 1;
+            item.textContent = numero.toString().padStart(4, '0');
+        });
+    }
+    setInterval(actualizarRuletaBonita, 3000); // Cambia cada 3 segundos
+
+    // 🎲 Selección aleatoria de número disponible
+    const btnAleatorio = document.getElementById("btn-aleatorio");
+    btnAleatorio.addEventListener("click", () => {
+        const disponibles = Array.from(document.querySelectorAll(".numero"))
+            .filter(n => !n.classList.contains("vendido") && !n.classList.contains("seleccionado"));
+
+        if (disponibles.length === 0) {
+            alert("No hay números disponibles.");
+            return;
+        }
+        const aleatorio = disponibles[Math.floor(Math.random() * disponibles.length)];
+        aleatorio.classList.add("seleccionado");
+        actualizarCarrito();
     });
 </script>
 
