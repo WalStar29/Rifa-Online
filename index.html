@@ -673,34 +673,6 @@
         aleatorio.classList.add("seleccionado");
         actualizarCarrito();
     });
-
-    // 🛠️ Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker registrado'))
-        .catch(err => console.error('Error al registrar SW:', err));
-    }
-
-    // 🎉 Saludo si está instalada como app
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log("App instalada como PWA");
-
-        const saludo = document.createElement("div");
-        saludo.textContent = "🎉 ¡Gracias por instalar Mega Rifa!";
-        saludo.style.position = "fixed";
-        saludo.style.bottom = "20px";
-        saludo.style.left = "50%";
-        saludo.style.transform = "translateX(-50%)";
-        saludo.style.background = "#00adb5";
-        saludo.style.color = "white";
-        saludo.style.padding = "10px 20px";
-        saludo.style.borderRadius = "8px";
-        saludo.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-        saludo.style.zIndex = "1000";
-        document.body.appendChild(saludo);
-
-        setTimeout(() => saludo.remove(), 5000);
-    }
 </script>
 
 </body>
