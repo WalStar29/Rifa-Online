@@ -1,7 +1,7 @@
 {
     "name": "Mega Rifa",
     "short_name": "Rifa",
-    "start_url": "/Rifa/index.html",
+    "start_url": "/Rifa-Online/index.html",
     "display": "standalone",
     "background_color": "#eeeeee",
     "theme_color": "#00adb5",
@@ -9,12 +9,12 @@
         {
         "src": "logo.jpg",
         "sizes": "192x192",
-        "type": "image/gjp"
+        "type": "image/jpeg"
         },
         {
         "src": "logo.jpg",
         "sizes": "512x512",
-        "type": "image/jpg"
+        "type": "image/jpeg"
         }
     ]
 }
