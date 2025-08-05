@@ -4,14 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mega Rifa</title>
-<!-- 📱 Manifest y PWA -->
 <link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/jpeg" sizes="192x192" href="logo.jpg" />
+<link rel="apple-touch-icon" href="logo.jpg" />
 <meta name="theme-color" content="#00adb5" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<!-- 🖼️ Íconos personalizados -->
-<link rel="icon" type="image/jpeg" sizes="192x192" href="logo.jpg" />
-<link rel="apple-touch-icon" href="logo.jpg" />
     <style>
     /* 🎯 Reset básico */
     * {
@@ -605,7 +603,7 @@
     for (let i = 1; i <= 1000; i++) {
         const num = document.createElement("div");
         num.className = "numero";
-        num.textContent = i.toString().padStart(4, '0'); // ← Formato 0001 a 1000
+        num.textContent = i.toString().padStart(4, '0');
         num.addEventListener("click", () => {
             if (!num.classList.contains("vendido")) {
                 num.classList.toggle("seleccionado");
@@ -659,7 +657,7 @@
             item.textContent = numero.toString().padStart(4, '0');
         });
     }
-    setInterval(actualizarRuletaBonita, 3000); // Cambia cada 3 segundos
+    setInterval(actualizarRuletaBonita, 3000);
 
     // 🎲 Selección aleatoria de número disponible
     const btnAleatorio = document.getElementById("btn-aleatorio");
@@ -676,12 +674,34 @@
         actualizarCarrito();
     });
 
-    // Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-            .then(() => console.log('Service Worker registrado'))
-            .catch(err => console.error('Error al registrar SW:', err));
-        }
+    // 🛠️ Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado'))
+        .catch(err => console.error('Error al registrar SW:', err));
+    }
+
+    // 🎉 Saludo si está instalada como app
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log("App instalada como PWA");
+
+        const saludo = document.createElement("div");
+        saludo.textContent = "🎉 ¡Gracias por instalar Mega Rifa!";
+        saludo.style.position = "fixed";
+        saludo.style.bottom = "20px";
+        saludo.style.left = "50%";
+        saludo.style.transform = "translateX(-50%)";
+        saludo.style.background = "#00adb5";
+        saludo.style.color = "white";
+        saludo.style.padding = "10px 20px";
+        saludo.style.borderRadius = "8px";
+        saludo.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+        saludo.style.zIndex = "1000";
+        document.body.appendChild(saludo);
+
+        setTimeout(() => saludo.remove(), 5000);
+    }
 </script>
+
 </body>
 </html>
