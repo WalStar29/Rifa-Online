@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#00adb5" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <style>
+<style>
     /* 🎯 Reset básico */
     * {
         box-sizing: border-box;
@@ -399,74 +399,122 @@
         }
     }
 
-/* 🎡 Ruleta circular mejorada */
-.ruleta-circular-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    /* 🎡 Ruleta circular mejorada */
+    .ruleta-circular-container {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.ruleta-circular {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 5px solid rgb(0, 173, 181);
-    animation: girarLento 12s linear infinite;
-    background: radial-gradient(circle, rgb(238, 238, 238) 40%, rgb(0, 173, 181) 100%);
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
+    .ruleta-circular {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 5px solid rgb(0, 173, 181);
+        animation: girarLento 12s linear infinite;
+        background: radial-gradient(circle, rgb(238, 238, 238) 40%, rgb(0, 173, 181) 100%);
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
 
-.ruleta-item {
-    position: absolute;
-    width: 60px;
-    height: 30px;
-    background: rgb(0, 173, 181);
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    transform-origin: center;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+    .ruleta-item {
+        position: absolute;
+        width: 60px;
+        height: 30px;
+        background: rgb(0, 173, 181);
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+        transform-origin: center;
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
 
-/* Posiciones circulares */
-.ruleta-item:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-.ruleta-item:nth-child(2) { top: 25%; left: 100%; transform: translate(-100%, -50%); }
-.ruleta-item:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.ruleta-item:nth-child(4) { top: 75%; left: 0%; transform: translate(0%, -50%); }
-.ruleta-item:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
+    /* Posiciones circulares */
+    .ruleta-item:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+    .ruleta-item:nth-child(2) { top: 25%; left: 100%; transform: translate(-100%, -50%); }
+    .ruleta-item:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .ruleta-item:nth-child(4) { top: 75%; left: 0%; transform: translate(0%, -50%); }
+    .ruleta-item:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
 
-@keyframes girarLento {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+    @keyframes girarLento {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 
-/* 🎲 Botón aleatorio */
-.boton-aleatorio {
-    margin: 10px auto 20px auto;
-    display: block;
-    padding: 10px 20px;
-    background: #009e3c;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
+    /* 🎲 Botón aleatorio */
+    .boton-aleatorio {
+        margin: 10px auto 20px auto;
+        display: block;
+        padding: 10px 20px;
+        background: #009e3c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background 0.3s;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
 
-.boton-aleatorio:hover {
-    background: #00c94d;
-}
+    .boton-aleatorio:hover {
+        background: #00c94d;
+    }
 
+    /* 📝 Formulario dentro del modal */
+    #formulario-compra {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
 
+    #formulario-compra input {
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid rgb(0, 173, 181);
+        font-size: 1em;
+        background: rgb(238, 238, 238);
+        color: rgb(34, 40, 49);
+        transition: border 0.3s;
+    }
 
-    </style>
+    #formulario-compra input:focus {
+        outline: none;
+        border-color: #009e3c;
+    }
+
+    #formulario-compra button {
+        padding: 10px;
+        background: rgb(0, 173, 181);
+        color: rgb(34, 40, 49);
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #formulario-compra button:hover {
+        background: #009e3c;
+    }
+
+    /* Responsive para formulario */
+    @media (max-width: 600px) {
+        #formulario-compra input {
+            font-size: 0.95em;
+            padding: 8px;
+        }
+
+        #formulario-compra button {
+            font-size: 0.95em;
+            padding: 8px;
+        }
+    }
+</style>
 </head>
 <body>
     <header>
@@ -546,10 +594,19 @@
             <h3>Confirmación de compra</h3>
             <p id="modal-numeros">Números seleccionados: </p>
             <p id="modal-total">Total a pagar: </p>
-            <p>¿Deseas continuar con el pago vía WhatsApp?</p>
-            <button id="confirmar-whatsapp" class="boton-comprar">Sí, continuar</button>
+            <form id="formulario-compra">
+                <input type="text" id="nombre" placeholder="Nombre" required />
+                <input type="text" id="apellido" placeholder="Apellido" required />
+                <input type="email" id="correo" placeholder="Correo electrónico" required />
+                <input type="text" id="direccion" placeholder="Dirección" required />
+                <input type="text" id="referencia" placeholder="N° de referencia Pago Móvil" required />
+                <input type="tel" id="telefono" placeholder="Teléfono" required />
+                <button type="submit" class="boton-comprar">✅ Enviar por WhatsApp</button>
+            </form>
         </div>
     </div>
+
+
 
 <script>
     // ⏱ Temporizador
@@ -561,8 +618,8 @@
         const distance = targetTime - now;
 
         if (distance < 0) {
-            countdownElement.textContent = "¡Sorteo en curso!";
-            return;
+        countdownElement.textContent = "¡Sorteo en curso!";
+        return;
         }
 
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -583,20 +640,18 @@
         const seleccionados = document.querySelectorAll(".numero.seleccionado");
 
         if (seleccionados.length > 0) {
-            carrito.classList.remove("oculto");
-            carrito.classList.add("mostrar");
+        carrito.classList.remove("oculto");
+        carrito.classList.add("mostrar");
 
-            const numeros = Array.from(seleccionados).map(n => n.textContent);
-            listaSeleccionados.textContent = numeros.join(", ");
-
-            const total = numeros.length * 0.50;
-            totalCompra.textContent = `$${total.toFixed(2)}`;
+        const numeros = Array.from(seleccionados).map(n => n.textContent);
+        listaSeleccionados.textContent = numeros.join(", ");
+        totalCompra.textContent = `$${(numeros.length * 0.50).toFixed(2)}`;
         } else {
-            carrito.classList.remove("mostrar");
-            carrito.classList.add("oculto");
+        carrito.classList.remove("mostrar");
+        carrito.classList.add("oculto");
 
-            listaSeleccionados.textContent = "Ninguno";
-            totalCompra.textContent = "$0.00";
+        listaSeleccionados.textContent = "Ninguno";
+        totalCompra.textContent = "$0.00";
         }
     }
 
@@ -605,10 +660,10 @@
         num.className = "numero";
         num.textContent = i.toString().padStart(4, '0');
         num.addEventListener("click", () => {
-            if (!num.classList.contains("vendido")) {
-                num.classList.toggle("seleccionado");
-                actualizarCarrito();
-            }
+        if (!num.classList.contains("vendido")) {
+            num.classList.toggle("seleccionado");
+            actualizarCarrito();
+        }
         });
         grid.appendChild(num);
     }
@@ -617,7 +672,6 @@
     const modal = document.getElementById("modal-compra");
     const cerrarModal = document.querySelector(".cerrar-modal");
     const btnWhatsapp = document.getElementById("btn-whatsapp");
-    const confirmarWhatsapp = document.getElementById("confirmar-whatsapp");
     const modalNumeros = document.getElementById("modal-numeros");
     const modalTotal = document.getElementById("modal-total");
 
@@ -637,24 +691,45 @@
         modal.style.display = "none";
     });
 
-    confirmarWhatsapp.addEventListener("click", () => {
+    // 📤 Envío por WhatsApp con formulario
+    document.getElementById("formulario-compra").addEventListener("submit", function(e) {
+        e.preventDefault();
+
         const seleccionados = document.querySelectorAll(".numero.seleccionado");
         const numeros = Array.from(seleccionados).map(n => n.textContent);
         const total = numeros.length * 0.50;
 
-        const mensaje = `¡Hola! Quiero participar en la rifa del iPhone 15 Pro Max.\n\nNúmeros seleccionados: ${numeros.join(", ")}\nTotal a pagar: $${total.toFixed(2)}\n\nMétodo de pago: Pago Móvil\nTeléfono: 0414-7996937\nCédula: V-29582989`;
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellido = document.getElementById("apellido").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const direccion = document.getElementById("direccion").value.trim();
+        const referencia = document.getElementById("referencia").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+
+        const mensaje = `¡Hola! Quiero participar en la rifa del iPhone 15 Pro Max.\n\n` +
+        `🧾 Números seleccionados: ${numeros.join(", ")}\n` +
+        `💰 Total a pagar: $${total.toFixed(2)}\n\n` +
+        `👤 Nombre: ${nombre} ${apellido}\n📧 Correo: ${correo}\n📍 Dirección: ${direccion}\n📱 Teléfono: ${telefono}\n🔢 Referencia Pago Móvil: ${referencia}`;
 
         const url = `https://wa.me/584147996937?text=${encodeURIComponent(mensaje)}`;
         window.open(url, "_blank");
         modal.style.display = "none";
+
+        // ✅ Marcar como vendidos
+        seleccionados.forEach(n => {
+        n.classList.remove("seleccionado");
+        n.classList.add("vendido");
+        });
+
+        actualizarCarrito();
     });
 
     // 🎡 Ruleta circular dinámica
     const ruletaItems = document.querySelectorAll(".ruleta-item");
     function actualizarRuletaBonita() {
         ruletaItems.forEach((item, i) => {
-            const numero = Math.floor(Math.random() * 1000) + 1;
-            item.textContent = numero.toString().padStart(4, '0');
+        const numero = Math.floor(Math.random() * 1000) + 1;
+        item.textContent = numero.toString().padStart(4, '0');
         });
     }
     setInterval(actualizarRuletaBonita, 3000);
@@ -663,23 +738,25 @@
     const btnAleatorio = document.getElementById("btn-aleatorio");
     btnAleatorio.addEventListener("click", () => {
         const disponibles = Array.from(document.querySelectorAll(".numero"))
-            .filter(n => !n.classList.contains("vendido") && !n.classList.contains("seleccionado"));
+        .filter(n => !n.classList.contains("vendido") && !n.classList.contains("seleccionado"));
 
         if (disponibles.length === 0) {
-            alert("No hay números disponibles.");
-            return;
+        alert("No hay números disponibles.");
+        return;
         }
         const aleatorio = disponibles[Math.floor(Math.random() * disponibles.length)];
         aleatorio.classList.add("seleccionado");
         actualizarCarrito();
     });
 
+    // 🛠️ Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js')
         .then(reg => console.log('✅ Service Worker registrado'))
         .catch(err => console.error('❌ Error al registrar SW:', err));
     }
 </script>
+
 
 </body>
 </html>
